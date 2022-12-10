@@ -46,8 +46,9 @@ public class App {
             }
             if(menuPrincipalOp == 3){
             }
+                menuAulas();
             if(menuPrincipalOp == 4){
-                //menuCursos();
+                menuCursos();
             }
                
         }
