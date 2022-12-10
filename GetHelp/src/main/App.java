@@ -6,8 +6,7 @@ public class App {
     private List<Aluno> alunos;
     private List<Professor> professores;
     private List<Aula> aulas;
-    int idAula;
-    String nomeAula;
+    private List<Curso> cursos;
     public Scanner input = new Scanner(System.in);  
 
     /**
@@ -21,7 +20,12 @@ public class App {
         Professor professor2 = new Professor("Prof Thales Junior", 444, "email@gamil.com", 20, 0.0, 0, "mestrado", "mestrado em matematica");
         professores.add(professor2);
         aulas = new ArrayList<>();
-        Aula aula2 = new Aula("Marcos", 5369, "Matemática", "Avançado");
+        Aula aula2 = new Aula("Prof Marcos", 5369, "Matemática", "Avançado");
+        aulas.add(aula2);
+        cursos = new ArrayList<>();
+        Curso cursos2 = new Curso("Prof Aurelio", 3689, "Matemática", "Avançado");
+        cursos.add(cursos2);
+
         int menuPrincipalOp = -1;
 
         while (menuPrincipalOp!=0){
@@ -345,7 +349,7 @@ public class App {
 		}
     }
     public void atualizarAula(){
-        System.out.println("Informe o ID dA aULA que será ATUALIZADA:");
+        System.out.println("Informe o ID daula que será ATUALIZADA:");
         int idAula = input.nextInt();
         input.nextLine();
         Aula aula = getAula(idAula);
@@ -353,7 +357,7 @@ public class App {
         aula.setNome(input.nextLine());
         System.out.println("Disciplina:");
         aula.setDisciplina(input.nextLine());
-        System.out.println("idade:");
+        System.out.println("Nivel de Ensino:");
         aula.setNivelDeEnsino(input.nextLine());
         input.nextLine();
     }
@@ -362,6 +366,99 @@ public class App {
             if(aulas.get(i).idAula == idAula){
                 Aula aula = aulas.get(i);
                 return aula;
+            }
+        }
+        return null;
+    }
+
+    public void menuCursos(){
+        int menuCusoOp = -1;
+
+        while (menuCusoOp!=0){
+            System.out.println("Aulas:");
+            System.out.println("1- Adcionar um novo Curso.");
+            System.out.println("2- Deletar um Curso.");
+            System.out.println("3- Atualizar Curso.");
+            System.out.println("4- Mostrar Curso");
+            System.out.println("5- Mostrar cursos cadastrados.");
+            System.out.println("0- Volta para o menu principal.");
+            menuCusoOp = input.nextInt();
+            input.nextLine();
+
+            if(menuCusoOp == 1){
+                cadastrarAula();
+            }
+            if(menuCusoOp == 2){
+                deletarAula();
+            }
+            if(menuCusoOp == 3){
+                atualizarAluno();
+            }
+            if(menuCusoOp == 4){
+                mostrarAluno();
+            }
+            if(menuCusoOp == 5){
+                mostrarAlunos();
+            }
+               
+        }
+    }
+    public void cadastrarCurso(){
+        System.out.println("Adicionar uma novo curso.");
+        System.out.println("Nome:");
+        String nome = input.nextLine();
+        System.out.println("Id:");
+        int idCurso = input.nextInt();
+        input.nextLine();
+        System.out.println("Disciplina:");
+        String disciplina = input.nextLine();
+        System.out.println("Nivel de Ensino: ");
+        String nivelDeEnsino = input.nextLine();
+        input.nextLine();
+        Curso curso = new Curso(nome, idCurso, disciplina, nivelDeEnsino);
+        cursos.add(curso);
+    }
+    public void deletarCurso(){
+        System.out.println("Informe o id da aula que será DELETADA:");
+        int idCurso = input.nextInt();
+        input.nextLine();
+        Curso curso = getCurso(idCurso);
+        cursos.remove(curso);
+    }
+    public void mostrarCurso(){
+        System.out.println("Informe o ID do curso que será mostrado:");
+        int idCurso = input.nextInt();
+        input.nextLine();
+        for(int i=0; i<cursos.size(); i++){
+            if(cursos.get(i).idCurso == idCurso){
+                System.out.println(cursos.get(i).print());
+            }
+        }
+    }
+    public void mostrarCursos(){
+        for(int i=0; i<cursos.size(); i++){
+            System.out.println("Cursos " + (i+1) + ':');
+            System.out.println(cursos.get(i).print());
+		}
+    }
+    public void atualizarCurso(){
+        System.out.println("Informe o ID do Curso que será ATUALIZADO:");
+        int idCurso = input.nextInt();
+        input.nextLine();
+        Aula aula = getAula(idCurso);
+        System.out.println("Nome:");
+        aula.setNome(input.nextLine());
+        System.out.println("Disciplina:");
+        aula.setDisciplina(input.nextLine());
+        System.out.println("Nivel de Ensino:");
+        aula.setNivelDeEnsino(input.nextLine());
+        input.nextLine();
+    }
+    public Curso getCurso(int idCurso){
+        for(int i=0; i<cursos.size(); i++){
+            if(cursos.get(i).idCurso == idCurso){
+                Curso curso = cursos.get(i);
+                return curso;
             }
         }
         return null;
