@@ -1,5 +1,6 @@
 package main;
 
+import java.sql.Connection;
 import java.util.*;
 
 public class App {
@@ -20,11 +21,6 @@ public class App {
         Professor professor2 = new Professor("Prof Thales Junior", 444, "email@gamil.com", 20, 0.0, 0, "mestrado", "mestrado em matematica");
         professores.add(professor2);
         aulas = new ArrayList<>();
-        Aula aula2 = new Aula("Prof Marcos", 5369, "Matemática", "Avançado");
-        aulas.add(aula2);
-        cursos = new ArrayList<>();
-        Curso cursos2 = new Curso("Prof Aurelio", 3689, "Matemática", "Avançado");
-        cursos.add(cursos2);
 
         int menuPrincipalOp = -1;
 
@@ -280,6 +276,8 @@ public class App {
         return null;
     }
     public void menuAulas(){
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConnection();
         int menuAulaOp = -1;
 
         while (menuAulaOp!=0){
@@ -294,37 +292,33 @@ public class App {
             input.nextLine();
 
             if(menuAulaOp == 1){
-                cadastrarAula();
+                cadastrarAula(con);
             }
             if(menuAulaOp == 2){
                 deletarAula();
             }
             if(menuAulaOp == 3){
-                atualizarAluno();
+                atualizarAula();
             }
             if(menuAulaOp == 4){
-                mostrarAluno();
+                mostrarAula();
             }
             if(menuAulaOp == 5){
-                mostrarAlunos();
+                listAulas(con);
             }
                
         }
     }
-    public void cadastrarAula(){
-        System.out.println("Adicionar uma nova aula.");
-        System.out.println("Nome:");
+    public void cadastrarAula(Connection con){
+        System.out.println("\nId aula:");
+        int idAula = Integer.parseInt(input.nextLine());
+        System.out.println("Nome: ");
         String nome = input.nextLine();
-        System.out.println("Id:");
-        int idAula = input.nextInt();
-        input.nextLine();
         System.out.println("Disciplina:");
         String disciplina = input.nextLine();
         System.out.println("Nivel de Ensino: ");
         String nivelDeEnsino = input.nextLine();
-        input.nextLine();
-        Aula aula = new Aula(nome, idAula, disciplina, nivelDeEnsino);
-        aulas.add(aula);
+        AulaModel.insert(new Aula(idAula, nome, disciplina, nivelDeEnsino ), con);
     }
     public void deletarAula(){
         System.out.println("Informe o id da aula que será DELETADA:");
@@ -343,11 +337,13 @@ public class App {
             }
         }
     }
-    public void mostrarAulas(){
-        for(int i=0; i<aulas.size(); i++){
-            System.out.println("Aulas " + (i+1) + ':');
-            System.out.println(aulas.get(i).print());
-		}
+    public void listAulas(Connection con){
+        List<Aula> aulas = AulaModel.select(con);
+        System.out.println();
+        for(Aula a : aulas){
+            System.out.println(a + "\n");
+        
+	    }
     }
     public void atualizarAula(){
         System.out.println("Informe o ID daula que será ATUALIZADA:");
@@ -373,10 +369,12 @@ public class App {
     }
 
     public void menuCursos(){
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConnection();
         int menuCusoOp = -1;
 
         while (menuCusoOp!=0){
-            System.out.println("Aulas:");
+            System.out.println("Cursos:");
             System.out.println("1- Adcionar um novo Curso.");
             System.out.println("2- Deletar um Curso.");
             System.out.println("3- Atualizar Curso.");
@@ -387,7 +385,7 @@ public class App {
             input.nextLine();
 
             if(menuCusoOp == 1){
-                cadastrarAula();
+                cadastrarCurso(con);
             }
             if(menuCusoOp == 2){
                 deletarAula();
@@ -399,25 +397,22 @@ public class App {
                 mostrarAluno();
             }
             if(menuCusoOp == 5){
-                mostrarAlunos();
+                mostrarCursos(con);
             }
                
         }
     }
-    public void cadastrarCurso(){
-        System.out.println("Adicionar uma novo curso.");
-        System.out.println("Nome:");
+    public void cadastrarCurso(Connection con){
+        System.out.println("\nId do curso:");
+        int idCurso = Integer.parseInt(input.nextLine());
+        System.out.println("Nome do curso: ");
         String nome = input.nextLine();
-        System.out.println("Id:");
-        int idCurso = input.nextInt();
-        input.nextLine();
         System.out.println("Disciplina:");
         String disciplina = input.nextLine();
         System.out.println("Nivel de Ensino: ");
         String nivelDeEnsino = input.nextLine();
-        input.nextLine();
-        Curso curso = new Curso(nome, idCurso, disciplina, nivelDeEnsino);
-        cursos.add(curso);
+        CursoModel.insert(new Curso(idCurso, nome, disciplina, nivelDeEnsino), con);
+        
     }
     public void deletarCurso(){
         System.out.println("Informe o id da aula que será DELETADA:");
@@ -436,10 +431,11 @@ public class App {
             }
         }
     }
-    public void mostrarCursos(){
-        for(int i=0; i<cursos.size(); i++){
-            System.out.println("Cursos " + (i+1) + ':');
-            System.out.println(cursos.get(i).print());
+    public void mostrarCursos(Connection con){
+        List<Curso> cursos = CursoModel.select(con);
+        System.out.println();
+        for(Curso c : cursos){
+            System.out.println(c + "\n");
 		}
     }
     public void atualizarCurso(){
