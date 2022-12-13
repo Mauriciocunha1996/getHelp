@@ -8,7 +8,7 @@ public class Aula {
     public Aula(){
         super();
     }
-    public Aula(String nome, int idAula, String disciplina, String nivelDeEnsino) {
+    public Aula(int idAula, String nome, String disciplina, String nivelDeEnsino) {
         this.idAula =  idAula;
         this.nome = nome;
         this.disciplina = disciplina;

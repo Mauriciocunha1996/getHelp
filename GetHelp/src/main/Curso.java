@@ -8,7 +8,7 @@ public class Curso{
     public Curso(){
         super();
     }
-    public Curso(String nome, int idCurso, String disciplina, String nivelDeEnsino) {
+    public Curso(int idCurso, String nome, String disciplina, String nivelDeEnsino) {
         this.idCurso =  idCurso;
         this.nome = nome;
         this.disciplina = disciplina;
