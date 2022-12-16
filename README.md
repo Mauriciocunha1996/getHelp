@@ -20,10 +20,15 @@ Na fase 3 do nosso trabalho implementamos todas as classes do Diagrama de Classe
 **Foco dos testes**
 
 **Classe AlunoTests:** Fizemos o teste com o objetivo de adicionar quantidade de aula.
+
 **Classe AulaTests:** Fizemos o teste para adicionar nota para determinada aula, o que seria um parâmetro de avaliação pela aula ali disponibilizada. Outro teste feito foi de calcular nota onde nesse teste é passado o valor para tirar média da soma das notas divididas pela quantidade de notas já contabilizadas para aquela determinada aula. Por fim, foi feita uma função para confirmar se a aula está sendo exibida.
+
 **Classe CompraTests:** Esse teste tem como objetivo calcular o valor de uma compra de aula ou curso, realizar compra de uma aula ou curso e quitar débitos pendentes do usuário.
+
 **Classe CursoTests:** Nesta classe fizemos o teste para adicionar nota para determinado curso, onde seria um parâmetro de avaliação pela o curso ali disponibilizado. Outro teste feito foi de calcular nota onde nesse teste é passado o valor para tirar média da soma das notas divididas pela quantidade de notas já contabilizadas para aquele determinado curso.
+
 **Classe PagamentoTests:** Nesse teste é verificado o cálculo do valor a ser pago e é feita a confirmação do pagamento.
+
 **Classe ProfessorTests:** Fizemos o teste para adicionar nota para determinado professor, o que seria o parâmetro de avaliação dos usuários para aula/curso ministrado. Outro teste feito foi de calcular a nota de avaliação deste professor, onde nesse teste é passado o valor para tirar média. O cálculo é feito pela soma das notas divididas pela quantidade de notas já contabilizadas para aquele determinado professor.
 Classe UsuarioTests:  É testado adicionar uma nova forma de pagamento.
 
