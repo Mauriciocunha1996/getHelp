@@ -2,28 +2,22 @@ package main;
 
 import java.util.List;
 
-public class Pagamento {
-    public int id;
+public class Compra {
+	public int id;
     private int usuario; 
     private double valor;
     private int tipo; 
     private List<Aula> aulas;
-    private double porcentagem;
-    private String dadosNovaForma;
-    private int tipoNovaForma;
 
-	public Pagamento() {
+	public Compra() {
 	}
 
-	public Pagamento(int id, int usuario, double valor, int tipo, List<Aula> aulas, double porcentagem, String dadosNovaForma, int tipoNovaForma) {
+	public Compra(int id, int usuario, double valor, int tipo, List<Aula> aulas) {
 		this.id = id;
 		this.usuario = usuario;
         this.valor = valor;
 		this.tipo = tipo;
         this.aulas = aulas;
-        this.porcentagem = porcentagem;
-		this.dadosNovaForma = dadosNovaForma;
-        this.tipoNovaForma = tipoNovaForma;
 	}
 
     public int getId() {
@@ -66,32 +60,9 @@ public class Pagamento {
 		this.aulas = aulas;
 	}
 
-    public double getPorcentagem() {
-		return porcentagem;
-	}
-
-	public void setPorcetagem(double porcentagem) {
-		this.porcentagem = porcentagem;
-	}
-
-    public String getDadosNovaForma() {
-        return dadosNovaForma;
-    }
-
-    public void setDadosNovaForma(String dadosNovaForma) {
-        this.dadosNovaForma = dadosNovaForma;
-    }
-
-    public int getTipoNovaForma() {
-		return tipoNovaForma;
-	}
-
-	public void setTipoNovaForma(int tipoNovaForma) {
-		this.tipoNovaForma = tipoNovaForma;
-	}
-
+	
 	public String print() {
-		return "Id:" + id + " Id usuario:" + usuario + " Valor:" + valor + " Tipo:" + tipo + " Aulas:" + aulas + " Porcentagem:" + porcentagem;
+		return "Id:" + id + " Id usuario:" + usuario + " Valor:" + valor + " Tipo:" + tipo + " Aulas:" + aulas;
 	}
 	
 	public boolean equals(Object obj) {
@@ -107,11 +78,17 @@ public class Pagamento {
 		for(int i=0; i<this.aulas.size(); i++){
             soma += aulas.get(i).getValor();
         }
-		this.valor = soma * this.porcentagem;
+		this.valor = soma;
 	}
 
-    public boolean pagar(double valor){
+    public boolean realizarCompra(double valor){
 		// Sistema chama serviço tercerizado
+        return true;
+	}
+
+    public boolean quitarDebitos(Usuario usuario){
+		this.valor = usuario.getDebitoPendente();
+        realizarCompra(this.valor);
         return true;
 	}
 }

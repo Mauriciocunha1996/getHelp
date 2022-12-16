@@ -5,7 +5,7 @@ import main.Aluno;
 
 public class AlunoMock {
 
-    public static Aluno get() {
+    public static Aluno get() { 
 
         Aluno mockAluno = new Aluno();
 

@@ -1,17 +1,20 @@
 package main;
 
+import java.util.List;
+
 public class Professor extends Usuario{
 	private double nota;
     private int quantidadeNotas;
     private String nivelDeEnsino;
     private String certificado;
+	private List<Double> notas;
 	
 	public Professor() {
 		super();
 	}
 
-	public Professor(String nome, int cpf, String email, int idade, double nota, int quantidadeNotas, String nivelDeEnsino, String certificado) {
-		super(nome, cpf, email, idade);
+	public Professor(String nome, int cpf, String email, int idade, double debitoPendente, List<String> formasDePagamento, double nota, int quantidadeNotas, String nivelDeEnsino, String certificado) {
+		super(nome, cpf, email, idade, debitoPendente, formasDePagamento);
 		this.nota = nota;
 		this.quantidadeNotas = quantidadeNotas;
 		this.nivelDeEnsino = nivelDeEnsino;
@@ -50,12 +53,29 @@ public class Professor extends Usuario{
 		this.certificado = certificado;
 	}
 
-    public String print() {
-		return "Nome:" + nome + " CPF:" + cpf + " Email:" + email + " Idade:" + idade + " Nota:" + nota + " Nivel de Ensino:" + nivelDeEnsino;
+	public List<Double> getNotas() {
+		return notas;
 	}
 
-	public void adicionarNota(float novaNota) {
-        this.quantidadeNotas = this.quantidadeNotas + 1;
-		this.nota = (this.nota + novaNota) / this.quantidadeNotas;
+	public void setNotas(List<Double> notas) {
+		this.notas = notas;
+	}
+
+    public String print() {
+		return "Nome:" + nome + " CPF:" + cpf + " Email:" + email + " Idade:" + idade + " Debitos pendente:" + debitoPendente + " Formas de Pagamento:" + formasDePagamento + " Nota:" + nota + " Nivel de Ensino:" + nivelDeEnsino;
+	}
+
+	public void adicionarNota(double novaNota) {
+		this.quantidadeNotas += 1;
+        this.notas.add(novaNota);
+		this.calcularNota();
+	}
+
+	public void calcularNota(){
+		double soma = 0;
+		for(int i=0; i<this.notas.size(); i++){
+            soma += notas.get(i);
+        }
+		this.nota = soma / this.quantidadeNotas;
 	}
 }
